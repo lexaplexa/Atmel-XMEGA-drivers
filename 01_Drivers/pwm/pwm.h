@@ -2,7 +2,7 @@
  * pwm.h
  *
  * Created: 25.1.2015 21:24:22
- * Revised: 18.5.2015
+ * Revised: 31.3.2018
  * Author: LeXa
  * BOARD:
  *
@@ -18,30 +18,76 @@
 
 class PWM
 {
-	private:
-		TC0_t *m_psTimerCounter;
-		PORT_t *m_psPort;
-		uint8_t m_unPinPosition;
-		uint32_t m_unPwmFrequency;
-		
-	public:
-		int8_t m_nPercent;
-		
-		PWM(PORT_t *psPort, TC0_t *psTimerCounter, uint8_t unPinPosition, PORT_OPC_enum ePinOPC, uint32_t unCpuFrequency, uint32_t unPwmFrequency);
-		
-		/* Set width of PWM in percent.
-		 * 0 - 100% - PWM width
-		 * 101%		- Capture compare value is bigger then Period value. Output is not refreshed and value is 1 */
-		void SetWidth(int8_t nPercent);
-		
-		/* Set frequency of PWM */
-		void SetFreq(uint32_t unCpuFrequency, uint32_t unPwmFrequency);
-		
-		/* PWM starts */
-		void Run();
-		
-		/* PWM stops. Output value 0 */
-		void Stop();
+    private:
+        TC0_t *m_psTimerCounter;
+        uint8_t m_unPinPosition;
+        
+    public:
+        int16_t m_nPercent;
+        
+        
+        /**
+        * \brief 
+        * 
+        * \param psPort
+        * \param psTimerCounter
+        * \param unPinPosition
+        * \param ePinOPC
+        * \param unCpuFrequency
+        * \param unPwmFrequency
+        * 
+        * \return 
+        */
+        PWM(PORT_t *psPort, TC0_t *psTimerCounter, uint8_t unPinPosition, PORT_OPC_enum ePinOPC, uint32_t unCpuFrequency, uint32_t unPwmFrequency);
+        
+        
+        /**
+        * \brief 
+        * 
+        * \param nPercent      - 1bit = 0.1%
+        * 
+        * \return void
+        */
+        void SetWidth(int16_t nPercent);
+        
+        
+        /**
+        * \brief 
+        * 
+        * \param nPercent      - 1bit = 0.1%
+        * 
+        * \return void
+        */
+        void Add(int16_t nPercent);
+        
+        
+        /**
+        * \brief 
+        * 
+        * \param unCpuFrequency
+        * \param unPwmFrequency
+        * 
+        * \return void
+        */
+        void SetFreq(uint32_t unCpuFrequency, uint32_t unPwmFrequency);
+        
+        
+        /**
+        * \brief 
+        * 
+        * 
+        * \return void
+        */
+        void Run();
+        
+        
+        /**
+        * \brief 
+        * 
+        * 
+        * \return void
+        */
+        void Stop();
 };
 
 #endif /* PWM_H_ */
