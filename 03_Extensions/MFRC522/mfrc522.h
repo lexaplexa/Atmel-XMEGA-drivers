@@ -2,7 +2,7 @@
  * mfrc522.h
  *
  * Created: 13.1.2016 15:22:07
- * Revised:	24.11.2016
+ * Revised:	24.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -26,7 +26,7 @@
 #define MFRC522_H_
 
 #include <avr/io.h>
-#include <drivers/spi.h>
+#include <core/drivers/spi.h>
 #include <conf/conf_board.h>
 
 /************************************************************************/

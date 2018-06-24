@@ -3,7 +3,7 @@
  * multitask.cpp
  *
  * Created: 4.12.2015 15:15:18
- * Revised: 31.3.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD: 
  * ABOUT:
@@ -251,7 +251,7 @@ SIGNAL(MULTITASK_INT_vect)
     typedef void (*AppPtr_t)() __attribute__((noreturn));
     const AppPtr_t RunApp = (AppPtr_t) APP_RESET_VECTOR_ADDR;
     
-    void Task_RunApp()
+    void taskRunApp()
     {
         cli();
         /* Multitask timer must be switched off, because application can use another timer for multitasking */

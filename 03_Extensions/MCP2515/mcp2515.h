@@ -2,7 +2,7 @@
  * mcp2515.h
  *
  * Created: 9.10.2014 13:56:34
- * Revised: 1.4.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -11,8 +11,8 @@
  *************************************************************************/
 
 #include <avr/io.h>
-#include <drivers/spi.h>
-#include <conf.h>
+#include <core/drivers/spi.h>
+#include <conf/conf.h>
 
 #ifndef MCP2515_H_
 #define MCP2515_H_

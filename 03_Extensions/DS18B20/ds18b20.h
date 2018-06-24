@@ -2,7 +2,7 @@
  * ds18b20.h
  *
  * Created: 18.4.2017 16:44:17
- * Revised: 1.4.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD:
  * ABOUT:
@@ -13,7 +13,7 @@
 #ifndef DS18B20_H_
 #define DS18B20_H_
 
-#include <drivers/usart.h>
+#include <core/drivers/usart.h>
 #include <conf/conf_board.h>
 
 

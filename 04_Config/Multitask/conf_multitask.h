@@ -2,7 +2,7 @@
  * conf_multitask.h
  *
  * Created: 4.1.2016 14:11:06
- * Revised: 31.3.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -14,7 +14,7 @@
 #ifndef CONF_MULTITASK_H_
 #define CONF_MULTITASK_H_
 
-#include <tasks/tasks.h>
+#include <core/core.h>
 
 /************************************************************************/
 /* MULTITASK SETTINGS                                                   */
@@ -32,10 +32,9 @@
 /************************************************************************/
 /* TASK BUFFER                                                          */
 /*----------------------------------------------------------------------*/
-/* You can predefine task buffer. If you want to run task directly      */
-/* after initialization, then set exact time match. In other case set   */
-/* time match to -1 (free buffer position). Number of rows in           */
-/* TASK_BUFFER_INIT must be same like TASK_BUFFER_SIZE.                 */
+/* You can predefine task buffer size. Size number depends on how many  */
+/* tasks you want to handle at the same time. Recommended minimal size  */
+/* is 2.                                                                */
 /************************************************************************/
 #define TASK_BUFFER_SIZE            2
 

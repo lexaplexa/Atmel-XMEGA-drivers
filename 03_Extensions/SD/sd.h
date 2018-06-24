@@ -2,7 +2,7 @@
  * sd.h
  *
  * Created: 27.5.2015 21:01:13
- * Revised: 1.4.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -11,8 +11,8 @@
  *************************************************************************/
 
 #include <avr/io.h>
-#include <drivers/spi.h>
-#include <conf.h>
+#include <core/drivers/spi.h>
+#include <conf/conf.h>
 
 #ifndef SD_H_
 #define SD_H_

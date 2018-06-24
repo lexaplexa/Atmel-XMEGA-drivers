@@ -2,7 +2,7 @@
  * rf.h
  *
  * Created: 11.10.2014 16:04:48
- * Revised: 31.3.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -13,7 +13,7 @@
 #ifndef RF_H_
 #define RF_H_
 
-#include <drivers/spi.h>
+#include <core/drivers/spi.h>
 #include <conf/conf_board.h>
 
 /************************************************************************/

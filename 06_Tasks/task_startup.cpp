@@ -2,7 +2,7 @@
  * task_startup.cpp
  *
  * Created: 11.10.2017 14:06:20
- * Revised: 23.2.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -10,7 +10,7 @@
  *
  *************************************************************************/
 
-#include <tasks/tasks.h>
+#include <core/core.h>
 
 CLOCK cClock;
 

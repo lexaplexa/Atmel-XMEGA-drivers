@@ -17,7 +17,7 @@
 #endif
 
 #include <avr/io.h>
-#include "Drivers/spi.h"
+#include <core/drivers/spi.h>
 
 /*===== HARDWARE CONNECTION ================================================*/
 

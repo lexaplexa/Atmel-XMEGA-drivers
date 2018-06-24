@@ -1,8 +1,8 @@
 /*************************************************************************
- * tasks.h
+ * core.h
  *
- * Created: 11.10.2017 14:07:04
- * Revised: 31.3.2018
+ * Created: 24.6.2018 09:57:04
+ * Revised: 
  * Author: LeXa
  * BOARD:
  *
@@ -11,24 +11,24 @@
  *************************************************************************/
 
 
-#ifndef TASKS_H_
-#define TASKS_H_
+#ifndef CORE_H_
+#define CORE_H_
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#include <multitask/multitask.h>
+#include <core/multitask/multitask.h>
 
 #include <conf/conf_board.h>
 #include <conf/conf_multitask.h>
 
-#include <drivers/clock.h>
+#include <core/drivers/clock.h>
 
 
 /************************************************************************/
 /* EXTERNAL CLASSES                                                     */
 /************************************************************************/
-extern class MTASK cMTask;                  /* multitask/multitask.cpp */
+extern class MTASK cMTask;              /* core/multitask/multitask.cpp */
 
 
 /************************************************************************/
@@ -42,8 +42,8 @@ extern class MTASK cMTask;                  /* multitask/multitask.cpp */
 /* For example:                                                         */
 /* task_startup.cpp                                                     */
 /*                                                                      */
-/* Every task source code must include tasks.h                          */
+/* Every task source code must include core.h                           */
 /************************************************************************/
 
 
-#endif /* TASKS_H_ */
+#endif /* CORE_H_ */

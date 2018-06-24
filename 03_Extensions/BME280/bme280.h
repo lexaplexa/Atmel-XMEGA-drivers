@@ -2,7 +2,7 @@
  * bme280.h
  *
  * Created: 21.7.2016 8:21:24
- * Revised: 1.4.2018
+ * Revised: 24.6.2018
  * Author: LeXa
  * 
  * ABOUT:
@@ -22,7 +22,7 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <drivers/twi.h>
+#include <core/drivers/twi.h>
 
 #define BME280_ADDR         0xEC    /* BME280 I2C identifier */
 
