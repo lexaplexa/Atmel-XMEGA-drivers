@@ -52,7 +52,7 @@
 /* STATIC_PAYLOAD OR DYNAMIC_PAYLOAD                                    */
 /************************************************************************/
 #ifndef DYNAMIC_PAYLOAD
-    #define DYNAMIC_PAYLOAD	                false
+    #define DYNAMIC_PAYLOAD                 false
 #endif
 
 #ifndef STATIC_PAYLOAD_BUFFER_LENGTH
@@ -70,7 +70,7 @@
 /* ENABLE DATA PIPES                                                    */
 /*----------------------------------------------------------------------*/
 /* 0 - disable data pipe                                                */
-/* 1 - enable data pipe	                                                */
+/* 1 - enable data pipe                                                 */
 /************************************************************************/
 #ifndef DATA_PIPE0_EN
     #define DATA_PIPE0_EN   1

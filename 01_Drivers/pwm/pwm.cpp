@@ -32,7 +32,7 @@ PWM::PWM(PORT_t *psPort, TC0_t *psTimerCounter, uint8_t unPinPosition, PORT_OPC_
     else if (m_unPinPosition == PIN4_bp)    {psPort->PIN4CTRL = ePinOPC; m_unPinPosition = PIN0_bp;}
     else if (m_unPinPosition == PIN5_bp)    {psPort->PIN5CTRL = ePinOPC; m_unPinPosition = PIN1_bp;}
         
-    /* Single slope PWM mode */	
+    /* Single slope PWM mode */ 
     m_psTimerCounter->CTRLB |= 0<<TC0_WGMODE2_bp|1<<TC0_WGMODE1_bp|1<<TC0_WGMODE0_bp;
     
     /* Default is PWM stopped */

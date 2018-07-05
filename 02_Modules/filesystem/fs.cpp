@@ -47,7 +47,7 @@ bool FS::Open(const char *pStringName, FILE_HANDLER_struct *sFile)
         for (uint16_t j=0; j<FS_BLOCK_SIZE; j+=FS_FILE_RECORD_LENGTH)
         {
             /* If no record then exit function */
-            if (pBuffer[j] == FILE_TYPE_NO_RECORD) {return false;}	
+            if (pBuffer[j] == FILE_TYPE_NO_RECORD) {return false;}  
             /* Compare file name */
             if (!strncmp((const char*)pStringName, (const char*)&pBuffer[j+1], 20))
             {
@@ -100,13 +100,13 @@ bool FS::Create(FILE_HANDLER_struct *sFile)
         for (uint8_t j=0; j<FS_BLOCK_SIZE; j+=FS_FILE_RECORD_LENGTH)
         {
             if (pBuffer[j] == FILE_TYPE_NO_RECORD) 
-            {				
+            {               
                 sFile->unID = i*FS_RECORDS_PER_BLOCK+j/FS_FILE_RECORD_LENGTH;
                 /* Open previous file to set StartBlock of new record */
                 Open(sFile->unID-1,&sFilePrev);
                 if (sFilePrev.sRecord.unNumOfBytes%FS_BLOCK_SIZE) {sFile->sRecord.unStartBlock = sFilePrev.sRecord.unStartBlock + (sFilePrev.sRecord.unNumOfBytes/FS_BLOCK_SIZE) + 1;}
                 else {sFile->sRecord.unStartBlock = sFilePrev.sRecord.unStartBlock + (sFilePrev.sRecord.unNumOfBytes/FS_BLOCK_SIZE);}
-                /* Create new record */			
+                /* Create new record */         
                 memcpy(pBuffer+j,&sFile->sRecord,sizeof(FILE_RECORD_struct));
                 cSD.WriteBlock(i,pBuffer);
                 return true;

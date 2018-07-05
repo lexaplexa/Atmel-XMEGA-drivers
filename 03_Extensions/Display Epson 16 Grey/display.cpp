@@ -19,9 +19,9 @@
 void DispInit()
 {
     DISP_DATA_PORT.OUT = 0x00;
-    DISP_DATA_PORT.DIRSET = 0xFF;                   /* Data ports set as output */	
+    DISP_DATA_PORT.DIRSET = 0xFF;                   /* Data ports set as output */  
     DISP_CMD_PORT.OUT = 0x00;
-    DISP_CMD_PORT.DIRSET = 1<<DISP_XCS_PIN|1<<DISP_A0_PIN|1<<DISP_XWR_PIN|1<<DISP_XRES_PIN;	/* Command pins set as output */	
+    DISP_CMD_PORT.DIRSET = 1<<DISP_XCS_PIN|1<<DISP_A0_PIN|1<<DISP_XWR_PIN|1<<DISP_XRES_PIN; /* Command pins set as output */    
     
     _delay_us(50);                                  /* Waiting after switch VCC */
     DISP_CMD_PORT.OUTSET = 1<<DISP_XRES_PIN;        /* HW reset off */
@@ -160,11 +160,11 @@ void DispPrintPicture(const uint8_t *punPicture, uint16_t unRowPos, uint16_t unC
 {
     /*===== PICTURE STRUCTURE ==============================================
     * Picture is stored in Program memory
-    * punPicture[0,1]	= number of rows (data type uint16_t - low byte first)
-    * punPicture[2,3]	= number of columns (data type uint16_t - low byte first)
-    * punPicture[4]	= COLMOD (2GS,4GS or 16GS)
-    * punPicture[5,6]	= number of pixel data bytes (data type uint16_t - low byte first)
-    * punPicture[7..n]	= pixel data
+    * punPicture[0,1]   = number of rows (data type uint16_t - low byte first)
+    * punPicture[2,3]   = number of columns (data type uint16_t - low byte first)
+    * punPicture[4] = COLMOD (2GS,4GS or 16GS)
+    * punPicture[5,6]   = number of pixel data bytes (data type uint16_t - low byte first)
+    * punPicture[7..n]  = pixel data
     *======================================================================*/
     
     /* Set COLMOD */
@@ -187,11 +187,11 @@ void DispPrintPicture(FILE_HANDLER_struct *sFile, uint16_t unRowPos, uint16_t un
     
     /*===== PICTURE STRUCTURE ==============================================
     * Picture is stored in SD card
-    * punPicture[0,1]	= number of rows (data type uint16_t - low byte first)
-    * punPicture[2,3]	= number of columns (data type uint16_t - low byte first)
-    * punPicture[4]	= COLMOD (2GS,4GS or 16GS)
-    * punPicture[5,6]	= number of pixel data bytes (data type uint16_t - low byte first)
-    * punPicture[7..n]	= pixel data
+    * punPicture[0,1]   = number of rows (data type uint16_t - low byte first)
+    * punPicture[2,3]   = number of columns (data type uint16_t - low byte first)
+    * punPicture[4] = COLMOD (2GS,4GS or 16GS)
+    * punPicture[5,6]   = number of pixel data bytes (data type uint16_t - low byte first)
+    * punPicture[7..n]  = pixel data
     *======================================================================*/
     
     /* Print only picture files */
@@ -238,7 +238,7 @@ void DispPrintPicture(FILE_HANDLER_struct *sFile, uint16_t unRowPos, uint16_t un
             DISP_DATA_PORT.OUT = aBuffer[j];                /* Read data from RAM */
             DISP_CMD_PORT.OUTCLR = 1<<DISP_XWR_PIN;         /* XWR set LOW */
             DISP_CMD_PORT.OUTSET = 1<<DISP_XWR_PIN;         /* XWR set HIGH */
-        }		
+        }       
         unLength -= unRest;                                 /* decrement length */
     }
     DISP_CMD_PORT.OUTSET = 1<<DISP_XCS_PIN;                 /* Chip is not selected */

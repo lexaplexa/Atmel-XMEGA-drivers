@@ -23,16 +23,16 @@
 
 #ifndef ST7735_SPI
     //#warning Default configuration ST7735_SPI
-    #define ST7735_SPI					SPIC
+    #define ST7735_SPI                  SPIC
 #endif
 #ifndef ST7735_PORT
     //#warning Default configuration ST7735_SPI
-    #define ST7735_PORT					PORTC
+    #define ST7735_PORT                 PORTC
 #endif
 
 #ifndef MCP_BAUD
     //#warning Default configuration MCP_BAUD
-    #define MCP_BAUD				1600000
+    #define MCP_BAUD                1600000
 #endif
 
 #define SCK             PIN7_bp

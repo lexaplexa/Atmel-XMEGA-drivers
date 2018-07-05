@@ -2,7 +2,7 @@
  * font_dos.c
  *
  * Created: 23.10.2014
- * Revised:	4.8.2015
+ * Revised: 4.8.2015
  * Author: LeXa
  * ABOUT: Variables with pixel data for every character.
  * Structure of data:
@@ -16,7 +16,7 @@
 
 #include <avr/pgmspace.h>
 
-#define FONT_DOS_SIZE	16	/* Maximal size of character in pixels */
+#define FONT_DOS_SIZE   16  /* Maximal size of character in pixels */
 
 /*===== Following pixel data for every character =========================*/
 const uint8_t dos_ascii_20[] PROGMEM = {0x10,0x04,0x10,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
@@ -114,9 +114,15 @@ const uint8_t dos_ascii_7B[] PROGMEM = {0x10,0x06,0x10,0x00,0x00,0x00,0x1C,0x30,
 const uint8_t dos_ascii_7C[] PROGMEM = {0x10,0x02,0x10,0x00,0x00,0x00,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0x00,0x00,0x00};
 const uint8_t dos_ascii_7D[] PROGMEM = {0x10,0x06,0x10,0x00,0x00,0x00,0xE0,0x30,0x30,0x30,0x1C,0x30,0x30,0x30,0x30,0xE0,0x00,0x00,0x00};
 const uint8_t dos_ascii_7E[] PROGMEM = {0x10,0x07,0x10,0x00,0x00,0x76,0xDC,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-/*===== Pointers to characters =============================================
+
+/*===== Pointers to characters =============================================
  * aFontXXXX[0] = FONT_SIZE
  * aFontXXXX[1..n] = pointers to each character pixel data
  *==========================================================================*/
-const uint8_t *aFontDos[] = {(const uint8_t*)FONT_DOS_SIZE,dos_ascii_20,dos_ascii_21,dos_ascii_22,dos_ascii_23,dos_ascii_24,dos_ascii_25,dos_ascii_26,dos_ascii_27,dos_ascii_28,dos_ascii_29,dos_ascii_2A,dos_ascii_2B,dos_ascii_2C,dos_ascii_2D,dos_ascii_2E,dos_ascii_2F,                           dos_ascii_30,dos_ascii_31,dos_ascii_32,dos_ascii_33,dos_ascii_34,dos_ascii_35,dos_ascii_36,dos_ascii_37,dos_ascii_38,dos_ascii_39,dos_ascii_3A,dos_ascii_3B,dos_ascii_3C,dos_ascii_3D,dos_ascii_3E,dos_ascii_3F,                           dos_ascii_40,dos_ascii_41,dos_ascii_42,dos_ascii_43,dos_ascii_44,dos_ascii_45,dos_ascii_46,dos_ascii_47,dos_ascii_48,dos_ascii_49,dos_ascii_4A,dos_ascii_4B,dos_ascii_4C,dos_ascii_4D,dos_ascii_4E,dos_ascii_4F,                           dos_ascii_50,dos_ascii_51,dos_ascii_52,dos_ascii_53,dos_ascii_54,dos_ascii_55,dos_ascii_56,dos_ascii_57,dos_ascii_58,dos_ascii_59,dos_ascii_5A,dos_ascii_5B,dos_ascii_5C,dos_ascii_5D,dos_ascii_5E,dos_ascii_5F,                           dos_ascii_60,dos_ascii_61,dos_ascii_62,dos_ascii_63,dos_ascii_64,dos_ascii_65,dos_ascii_66,dos_ascii_67,dos_ascii_68,dos_ascii_69,dos_ascii_6A,dos_ascii_6B,dos_ascii_6C,dos_ascii_6D,dos_ascii_6E,dos_ascii_6F,                           dos_ascii_70,dos_ascii_71,dos_ascii_72,dos_ascii_73,dos_ascii_74,dos_ascii_75,dos_ascii_76,dos_ascii_77,dos_ascii_78,dos_ascii_79,dos_ascii_7A,dos_ascii_7B,dos_ascii_7C,dos_ascii_7D,dos_ascii_7E};
+const uint8_t *aFontDos[] = {(const uint8_t*)FONT_DOS_SIZE,dos_ascii_20,dos_ascii_21,dos_ascii_22,dos_ascii_23,dos_ascii_24,dos_ascii_25,dos_ascii_26,dos_ascii_27,dos_ascii_28,dos_ascii_29,dos_ascii_2A,dos_ascii_2B,dos_ascii_2C,dos_ascii_2D,dos_ascii_2E,dos_ascii_2F,
+                           dos_ascii_30,dos_ascii_31,dos_ascii_32,dos_ascii_33,dos_ascii_34,dos_ascii_35,dos_ascii_36,dos_ascii_37,dos_ascii_38,dos_ascii_39,dos_ascii_3A,dos_ascii_3B,dos_ascii_3C,dos_ascii_3D,dos_ascii_3E,dos_ascii_3F,
+                           dos_ascii_40,dos_ascii_41,dos_ascii_42,dos_ascii_43,dos_ascii_44,dos_ascii_45,dos_ascii_46,dos_ascii_47,dos_ascii_48,dos_ascii_49,dos_ascii_4A,dos_ascii_4B,dos_ascii_4C,dos_ascii_4D,dos_ascii_4E,dos_ascii_4F,
+                           dos_ascii_50,dos_ascii_51,dos_ascii_52,dos_ascii_53,dos_ascii_54,dos_ascii_55,dos_ascii_56,dos_ascii_57,dos_ascii_58,dos_ascii_59,dos_ascii_5A,dos_ascii_5B,dos_ascii_5C,dos_ascii_5D,dos_ascii_5E,dos_ascii_5F,
+                           dos_ascii_60,dos_ascii_61,dos_ascii_62,dos_ascii_63,dos_ascii_64,dos_ascii_65,dos_ascii_66,dos_ascii_67,dos_ascii_68,dos_ascii_69,dos_ascii_6A,dos_ascii_6B,dos_ascii_6C,dos_ascii_6D,dos_ascii_6E,dos_ascii_6F,
+                           dos_ascii_70,dos_ascii_71,dos_ascii_72,dos_ascii_73,dos_ascii_74,dos_ascii_75,dos_ascii_76,dos_ascii_77,dos_ascii_78,dos_ascii_79,dos_ascii_7A,dos_ascii_7B,dos_ascii_7C,dos_ascii_7D,dos_ascii_7E};
 

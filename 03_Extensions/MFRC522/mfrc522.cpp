@@ -24,7 +24,7 @@ MFRC522::MFRC522()
     spi_cs_disable(MFRC522_PORT);
     spi_set_mode(MFRC522_SPI,SPI_MODE_0_gc);
     spi_set_dord(MFRC522_SPI,SPI_DORD_MSB_FIRST);
-    spi_enable_master(MFRC522_SPI);	
+    spi_enable_master(MFRC522_SPI); 
         
     /* Set SPI Baudrate */
     #if (MFRC522_BAUD <= F_CPU/128)
@@ -43,7 +43,7 @@ MFRC522::MFRC522()
         MFRC522_SPI.CTRL |= 1<<SPI_CLK2X_bp|SPI_PRESCALER_DIV4_gc;
     #else
         MFRC522_SPI.CTRL |= 1<<SPI_CLK2X_bp|SPI_PRESCALER_DIV4_gc;
-    #endif	
+    #endif  
     
     /* Set interrupt on pin MFRC522_IRQ_PIN */
     MFRC522_PORT.INT0MASK = 1<<MFRC522_IRQ_PIN;
@@ -70,12 +70,12 @@ MFRC522::MFRC522()
     
     WriteReg(REG_CommandReg,COMM_SoftReset);        /* Soft Reset */
     
-    WriteReg(REG_TModeReg, 0x80);                   /* TAuto=1; timer starts automatically at the end of the transmission in all communication modes at all speeds	 */
-    WriteReg(REG_TPrescalerReg, 0xA9);              /* TPreScaler = TModeReg[3..0]:TPrescalerReg, ie 0x0A9 = 169 => f_timer=40kHz, ie a timer period of 25us.		 */
-    WriteReg(REG_TReloadRegH, 0x03);                /* Reload timer with 0x3E8 = 1000, ie 25ms before timeout.														 */
+    WriteReg(REG_TModeReg, 0x80);                   /* TAuto=1; timer starts automatically at the end of the transmission in all communication modes at all speeds   */
+    WriteReg(REG_TPrescalerReg, 0xA9);              /* TPreScaler = TModeReg[3..0]:TPrescalerReg, ie 0x0A9 = 169 => f_timer=40kHz, ie a timer period of 25us.        */
+    WriteReg(REG_TReloadRegH, 0x03);                /* Reload timer with 0x3E8 = 1000, ie 25ms before timeout.                                                       */
     WriteReg(REG_TReloadRegL, 0xe8);                
     
-    WriteReg(REG_TxASKReg, 0x40);                   /* Default 0x00. Force a 100 % ASK modulation independent of the ModGsPReg register setting						 */
+    WriteReg(REG_TxASKReg, 0x40);                   /* Default 0x00. Force a 100 % ASK modulation independent of the ModGsPReg register setting                      */
     WriteReg(REG_ModeReg, 0x3D);                    /* Default 0x3F. Set the preset value for the CRC coprocessor for the CalcCRC command to 0x6363 (ISO 14443-3 part 6.2.4) */
     
     AntennaOn();
@@ -111,10 +111,10 @@ inline void MFRC522::ReadReg(REG_enum eReg, uint8_t unNum, uint8_t *punBuffer)
 
 inline void MFRC522::WriteReg(REG_enum eReg, uint8_t unData)
 {
-	spi_cs_enable(MFRC522_PORT);
-	spi_send(MFRC522_SPI,(eReg<<1)&~WRITE_REG_SIG);             /* Register address with WRITE signature */
-	spi_send(MFRC522_SPI,unData);                               /* Send data */
-	spi_cs_disable(MFRC522_PORT);
+    spi_cs_enable(MFRC522_PORT);
+    spi_send(MFRC522_SPI,(eReg<<1)&~WRITE_REG_SIG);             /* Register address with WRITE signature */
+    spi_send(MFRC522_SPI,unData);                               /* Send data */
+    spi_cs_disable(MFRC522_PORT);
 }
 
 inline void MFRC522::WriteReg(REG_enum eReg, uint8_t *unData, uint8_t unLen)
@@ -191,7 +191,7 @@ STATUS_enum MFRC522::SendCommand(COMM_enum eComm, uint8_t *punDatatoSend, uint8_
     WriteReg(REG_CommandReg, eComm);                            /* Execute the command                                  */
     if (eComm == COMM_Transceive)
     {
-        SetRegBitMask(REG_BitFramingReg,0x80);                  /* Start transmission of data                           */	
+        SetRegBitMask(REG_BitFramingReg,0x80);                  /* Start transmission of data                           */  
     }
     
     /* Wait until transmission is complete */
@@ -235,7 +235,7 @@ STATUS_enum MFRC522::CalculateCRC(uint8_t *punDatatoSend, uint8_t unLen, uint8_t
     
     WriteReg(REG_CommandReg, COMM_Idle);                /* Stop calculating CRC for new content in the FIFO.                                                                        */
     
-    /* Transfer the result from the registers to the result buffer	*/
+    /* Transfer the result from the registers to the result buffer  */
     punReturnDat[0] = ReadReg((REG_enum)(REG_CRCResultReg+1));
     punReturnDat[1] = ReadReg(REG_CRCResultReg);
     return STATUS_OK;

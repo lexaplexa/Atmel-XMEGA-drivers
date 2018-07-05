@@ -19,7 +19,7 @@ SD::SD()
     /* Setup pins direction */
     spi_set_master_port_dir(SD_PORT);
 
-#ifdef COMPILE_SD_INSERT_DETECT	
+#ifdef COMPILE_SD_INSERT_DETECT 
     /* Setup SD switch pin */
     SD_PORT.DIRCLR = 1<<SD_SWITCH_PIN;
     SD_PORT.INT0MASK = 1<<SD_SWITCH_PIN;
@@ -110,9 +110,9 @@ bool SD::Init()
         if (retry++ > 0xFE) {break;}
     } while(unResp == 0xFF);
     
-    //while(spi_send(SD_SPI,0xFF) == 0xFF)	{if (retry++ > 0xFE) {break;}}
+    //while(spi_send(SD_SPI,0xFF) == 0xFF)  {if (retry++ > 0xFE) {break;}}
         
-    /* OCR - 4 bytes (MSB first) */	
+    /* OCR - 4 bytes (MSB first) */ 
     spi_send(SD_SPI,0xFF);
     unResp = spi_read(SD_SPI);
     if (unResp & 0x40) {m_eCardType = SD_CARD_TYPE_SDHC_SDXC;}
@@ -184,7 +184,7 @@ bool SD::ReadBlock(uint32_t unBlockNum, uint8_t *punBuffer)
     if (!m_bCardInitialized) {return false;}
     if (m_eCardType = SD_CARD_TYPE_SDSC) {unBlockNum <<= 9;}        /* SDSC use byte address, SDHC and SDXC use block address */
     
-    if (SendCommand(SD_CMD_READ_SINGLE_BLOCK, unBlockNum, 0xFF) != R1_NO_ERROR) {return false;}	/* 0x00 = OK, else error */
+    if (SendCommand(SD_CMD_READ_SINGLE_BLOCK, unBlockNum, 0xFF) != R1_NO_ERROR) {return false;} /* 0x00 = OK, else error */
     
     spi_cs_enable(SD_PORT);
     /* Wait for data token 0xFE */
@@ -256,7 +256,7 @@ bool SD::WriteBlock(uint32_t unBlockNum, uint8_t *punBuffer)
 bool SD::EraseBlocks(uint32_t unStartBlock, uint32_t unTotalBlocks)
 {
     if (!m_bCardInitialized) {return false;}
-    if (m_eCardType = SD_CARD_TYPE_SDSC) {unStartBlock <<= 9;}		/* SDSC use byte address, SDHC and SDXC use block address */
+    if (m_eCardType = SD_CARD_TYPE_SDSC) {unStartBlock <<= 9;}      /* SDSC use byte address, SDHC and SDXC use block address */
     
     if (SendCommand(SD_CMD_ERASE_BLOCK_START_ADDR,unStartBlock, 0xFF) != R1_NO_ERROR) {return false;}                   /* 0x00 = OK, else error */
     if (SendCommand(SD_CMD_ERASE_BLOCK_END_ADDR,(unStartBlock+unTotalBlocks-1), 0xFF) != R1_NO_ERROR) {return false;}   /* 0x00 = OK, else error */

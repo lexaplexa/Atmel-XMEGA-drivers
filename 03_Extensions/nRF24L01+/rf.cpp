@@ -112,7 +112,7 @@ void RF::Init()
     
     WriteReg(RF_REG_SETUP_RETR,0x78);                           /* Set delay between retransmissions (bit7-4) and number of max. retransmission (bit3-0) */
     
-#if ENABLE_AUTOACK == true	
+#if ENABLE_AUTOACK == true  
     WriteReg(RF_REG_EN_AA,DATA_PIPE0_EN<<0|                     /* Enable auto acknowledgment for data pipes */
                           DATA_PIPE1_EN<<1|
                           DATA_PIPE2_EN<<2|
@@ -123,7 +123,7 @@ void RF::Init()
     WriteReg(RF_REG_EN_AA,0x00);                                /* Disable auto acknowledgment for all data pipes */
 #endif
     
-    WriteReg(RF_REG_EN_RXADDR,DATA_PIPE0_EN<<0|	                /* Enable data pipes */
+    WriteReg(RF_REG_EN_RXADDR,DATA_PIPE0_EN<<0|                 /* Enable data pipes */
                               DATA_PIPE1_EN<<1|
                               DATA_PIPE2_EN<<2|
                               DATA_PIPE3_EN<<3|

@@ -1,4 +1,3 @@
-
 /*****************************************************************************
  * multitask.h
  *
@@ -161,7 +160,7 @@ class MTASK
          * \return uint8_t  - task buffer position (0 - (TASK_BUFFER_SIZE-1)). Not available if returned TASK_IDLE
          */
         inline uint8_t unBufferPos(void taskFunc());
-    	
+        
         
     public:
         /**
@@ -290,7 +289,7 @@ class MTASK
         
         
         /**
-        * \brief	Set priority to task function taskFunc
+        * \brief    Set priority to task function taskFunc
         *
         * \param taskFunc      - task function
         * \param unPriority    - priority (0 -> lowest,..., 7 -> highest)

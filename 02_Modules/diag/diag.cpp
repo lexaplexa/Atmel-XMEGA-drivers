@@ -2,7 +2,7 @@
  * diag.cpp
  *
  * Created: 12.1.2015 11:20:23
- * Revised:	1.4.2018
+ * Revised: 1.4.2018
  * Author: LeXa
  * BOARD: 
  *
@@ -23,7 +23,7 @@ DIAG_enum DiagSingleFrame(uint8_t *paData, uint8_t unDataLength)
 {
     CAN_MSG_t sCanMsg = {0,DIAG_TESTER_ID,8,0,0,0,0,0,0,0,0};
         
-    if (unDataLength > 7) {return DIAG_OUT_OF_RANGE;}	
+    if (unDataLength > 7) {return DIAG_OUT_OF_RANGE;}   
     
     /************************************************************************/
     /* Byte 0 - Protocol Control Information (PCI) and                      */
@@ -80,7 +80,7 @@ DIAG_enum DiagConsecutiveFrame(uint8_t *paData, uint16_t unDataLength)
         
     /************************************************************************/
     /* Byte 0 - Protocol Control Information (PCI)                          */
-    /* Byte 1-7	- data                                                      */
+    /* Byte 1-7 - data                                                      */
     /* data_length can be max. 4095 bytes long                              */
     /* Sequence 1-15 - sequence number                                      */
     /************************************************************************/
@@ -166,7 +166,7 @@ DIAG_enum DiagAnalyzeFrame(CAN_MSG_t *psCanMsg)
                 if ((i + m_unSequence*7 + m_unByteCounter) == sDiagMsg.unLength) {return DIAG_LAST_CF;}
             }
             /* Increment sequence number */
-            m_unSequence++;	
+            m_unSequence++; 
             /* When block size reaches maximum */
             if (m_unSequence == FLOW_CONTROL_BLOCK_SIZE)
             {

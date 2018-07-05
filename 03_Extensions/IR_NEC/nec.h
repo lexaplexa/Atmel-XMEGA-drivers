@@ -27,8 +27,8 @@
     #define IR_PORT         PORTC
 #endif
 #ifndef IR_PIN
-	#define IR_PIN          6
-#endif	
+    #define IR_PIN          6
+#endif  
 
 
 /*===== COUNTER DEFINES ====================================================

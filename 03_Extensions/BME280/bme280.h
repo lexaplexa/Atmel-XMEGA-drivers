@@ -155,7 +155,7 @@ class BME280 {
          * \brief    BME280 constructor
          * 
          * \param psTwi          - pointer to TWI
-         * \param unFcpu         - CPU frequency	
+         * \param unFcpu         - CPU frequency    
          * \param unFtwi         - TWI baud rate
          * 
          * \return 
@@ -238,7 +238,7 @@ class BME280 {
             
             for (uint8_t i=0; i<num; i++)
             {
-                TWI_MASTER_WAIT_READ_DONE(m_psTwi);	                    /* Wait until data received */
+                TWI_MASTER_WAIT_READ_DONE(m_psTwi);                     /* Wait until data received */
                 TWI_MASTER_CLEAR_READ_FLAG(m_psTwi);                    /* Clear flag */
                 data[i] = m_psTwi->MASTER.DATA;                         /* Read data from register */
                 TWI_MASTER_ACKM(m_psTwi);                               /* Acknowledge */
@@ -262,7 +262,7 @@ class BME280 {
             adc_T = (uint32_t)data[0]<<12|(uint32_t)data[1]<<4|data[2]>>4;
             
             var1 = ((((adc_T>>3) - ((int32_t)m_sCompData.dig_T1<<1))) * ((int32_t)m_sCompData.dig_T2)) >> 11;
-            var2 = (((((adc_T>>4) - ((int32_t)m_sCompData.dig_T1)) * ((adc_T>>4) - ((int32_t)m_sCompData.dig_T1))) >> 12) *	((int32_t)m_sCompData.dig_T3)) >> 14;
+            var2 = (((((adc_T>>4) - ((int32_t)m_sCompData.dig_T1)) * ((adc_T>>4) - ((int32_t)m_sCompData.dig_T1))) >> 12) * ((int32_t)m_sCompData.dig_T3)) >> 14;
             t_fine = var1 + var2;
             m_nTemp = (int32_t)(t_fine * 5 + 128) >> 8;
             return (uint16_t)m_nTemp;

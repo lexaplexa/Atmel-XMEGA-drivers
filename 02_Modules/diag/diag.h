@@ -24,7 +24,7 @@
     #warning Default configuration DIAG_TESTER_ID
     #define DIAG_TESTER_ID                  0x714
 #endif
-#ifndef DIAG_CLUSTER_ID	
+#ifndef DIAG_CLUSTER_ID 
     #warning Default configuration DIAG_CLUSTER_ID
     #define DIAG_CLUSTER_ID                 0x77E
 #endif
@@ -40,10 +40,10 @@
 /************************************************************************/
 /* PROTOCOL CONTROL INFORMATION                                         */
 /************************************************************************/
-#define PCI_SINGLE_FRAME		0x00
-#define PCI_FIRST_FRAME			0x10
-#define PCI_CONSECUTIVE_FRAME	0x20
-#define PCI_FLOW_CONTROL		0x30
+#define PCI_SINGLE_FRAME        0x00
+#define PCI_FIRST_FRAME         0x10
+#define PCI_CONSECUTIVE_FRAME   0x20
+#define PCI_FLOW_CONTROL        0x30
 
 /************************************************************************/
 /* DIAG RETURN ERROR CODES                                              */

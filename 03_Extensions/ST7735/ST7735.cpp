@@ -76,7 +76,7 @@ void ST7735::SendCommand(ST7735_CMD_enum eCommand)
 {
     ST7735_PORT.OUTCLR = 1<<CS|1<<A0;   // Before sending data
     spi_send(ST7735_SPI,eCommand);
-    ST7735_PORT.OUTSET = 1<<CS;	        // Chip is not selected
+    ST7735_PORT.OUTSET = 1<<CS;         // Chip is not selected
 }
 
 void ST7735::CaSet(uint8_t unStart, uint8_t unEnd)
@@ -219,7 +219,7 @@ void ST7735::ColorArea(uint8_t unRowStart, uint8_t unRowEnd, uint8_t unColStart,
     
     /* Send color data */
     SendCommand(ST7735_CMD_RAMWR);
-    ST7735_PORT.OUTSET = 1<<A0;	
+    ST7735_PORT.OUTSET = 1<<A0; 
     ST7735_PORT.OUTCLR = 1<<CS;
     for(uint16_t i=0; i<u16PixCount; i++)
     {
@@ -469,7 +469,7 @@ void ST7735::Println(uint8_t *pchText, uint8_t unRowPos, uint8_t unColPos, uint8
                 }
     
         
-        ST7735_PORT.OUTSET = 1<<CS;			// Chip is not selected
+        ST7735_PORT.OUTSET = 1<<CS;         // Chip is not selected
         
         /* Position of next sign, clear space between signs */
         unColPos += pgm_read_byte(pchSign+1)+2;

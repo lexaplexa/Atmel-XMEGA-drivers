@@ -155,7 +155,7 @@ bool MCP2515::SendCANmsg(CAN_MSG_t *psCanmsg)
         spi_send(MCP_SPI,0);                                                            /* EIDH */
         spi_send(MCP_SPI,0);                                                            /* EIDL */
         spi_send(MCP_SPI,psCanmsg->dlc);                                                /* DLC */
-        for (uint8_t i=0; i<psCanmsg->dlc; i++)	{spi_send(MCP_SPI,psCanmsg->data[i]);}  /* DATA */
+        for (uint8_t i=0; i<psCanmsg->dlc; i++) {spi_send(MCP_SPI,psCanmsg->data[i]);}  /* DATA */
         spi_cs_disable(MCP_PORT);
     }
     /* LOAD DATA TO TX BUFFER EXTENDED ID */
@@ -168,7 +168,7 @@ bool MCP2515::SendCANmsg(CAN_MSG_t *psCanmsg)
         spi_send(MCP_SPI,(uint8_t)(psCanmsg->id>>8));                                       /* EIDH */
         spi_send(MCP_SPI,(uint8_t)(psCanmsg->id>>0));                                       /* EIDL */
         spi_send(MCP_SPI,psCanmsg->dlc);                                                    /* DLC */
-        for (uint8_t i=0; i<psCanmsg->dlc; i++)	{spi_send(MCP_SPI,psCanmsg->data[i]);}      /* DATA */
+        for (uint8_t i=0; i<psCanmsg->dlc; i++) {spi_send(MCP_SPI,psCanmsg->data[i]);}      /* DATA */
         spi_cs_disable(MCP_PORT);
     }
     
@@ -192,7 +192,7 @@ void MCP2515::ReadCANmsg(RXTXBUFFER_enum eRxBuf, CAN_MSG_t *psCanmsg)
     else if (eRxBuf == RX1_BUFFER) {spi_send(MCP_SPI,INST_READ_RX1_BUF_ID);}
     else {spi_cs_disable(MCP_PORT); return;}
     
-    /* READ CAN MESSAGE */	
+    /* READ CAN MESSAGE */  
     spi_send(MCP_SPI,NO_OPERATION);
     id[0] = spi_read(MCP_SPI);                              /* SIDH */
     spi_send(MCP_SPI,NO_OPERATION);

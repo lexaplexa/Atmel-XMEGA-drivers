@@ -77,69 +77,69 @@ class FS
         /*------------------------------------------------------- 
         * Open file according his name
         * Input Parameters
-        *		*pStringName	- file name
+        *       *pStringName    - file name
         * Output Parameters
-        *		*sFile			- pointer to file handler (if file found)
+        *       *sFile          - pointer to file handler (if file found)
         * Return
-        *		true			- file found
-        *		false			- file not found
+        *       true            - file found
+        *       false           - file not found
         *-------------------------------------------------------*/
         bool Open(const char *pStringName, FILE_HANDLER_struct *sFile);
         
         /*------------------------------------------------------- 
         * Open file according ID
         * Input Parameters
-        *		unID			- file ID (according order of records)
+        *       unID            - file ID (according order of records)
         * Output Parameters
-        *		*sFile			- pointer to file handler (if file found)
+        *       *sFile          - pointer to file handler (if file found)
         * Return
-        *		true			- file found
-        *		false			- file not found
+        *       true            - file found
+        *       false           - file not found
         *-------------------------------------------------------*/
         bool Open(uint16_t unID, FILE_HANDLER_struct *sFile);
         
         /*------------------------------------------------------- 
         * Create file record
         * Input/Output Parameters
-        *		*sFile			- pointer to file handler
+        *       *sFile          - pointer to file handler
         * Return
-        *		true			- file created (start block added)
-        *		false			- file not created
+        *       true            - file created (start block added)
+        *       false           - file not created
         *-------------------------------------------------------*/
         bool Create(FILE_HANDLER_struct *sFile);
         
         /*------------------------------------------------------- 
         * Delete file record
         * Input Parameters
-        *		*sFile			- pointer to file handler
+        *       *sFile          - pointer to file handler
         * Return
-        *		true			- file deleted
-        *		false			- file not deleted
+        *       true            - file deleted
+        *       false           - file not deleted
         *-------------------------------------------------------*/
         bool Delete(FILE_HANDLER_struct *sFile);
         
         /*------------------------------------------------------- 
         * Read file data
         * Input Parameters
-        *		*sFile			- pointer to file handler
-        *		unBlockNum		- block number to read (0..n)
+        *       *sFile          - pointer to file handler
+        *       unBlockNum      - block number to read (0..n)
         * Output Parameters
-        *		*punBuffer		- pointer to data buffer
+        *       *punBuffer      - pointer to data buffer
         * Return
-        *		true			- file data read successful
-        *		false			- file data read unsuccessful
+        *       true            - file data read successful
+        *       false           - file data read unsuccessful
         *-------------------------------------------------------*/
         bool Read(FILE_HANDLER_struct *sFile, uint32_t unBlockNum, uint8_t *punBuffer);
         
         /*------------------------------------------------------- 
         * Write file data
         * Input Parameters
-        *		*sFile			- pointer to file handler
-        *		unBlockNum		- block number to write (0..n)
-        *		*punBuffer		- pointer to data buffer
+        *       *sFile          - pointer to file handler
+        *       unBlockNum      - block number to write (0..n)
+        *       *punBuffer      - pointer to data buffer
         * Return
-        *		true			- file data write successful
-        *		false			- file data write unsuccessful
+        *       true            - file data write successful
+        *       false           - file data write unsuccessful
         *-------------------------------------------------------*/
         bool Write(FILE_HANDLER_struct *sFile, uint32_t unBlockNum, uint8_t *punBuffer);
 };

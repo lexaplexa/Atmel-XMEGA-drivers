@@ -44,6 +44,6 @@ extern class MTASK cMTask;              /* core/multitask/multitask.cpp */
 /*                                                                      */
 /* Every task source code must include core.h                           */
 /************************************************************************/
-
+void taskStartUpApp();
 
 #endif /* CORE_H_ */

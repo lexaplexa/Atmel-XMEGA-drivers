@@ -56,7 +56,7 @@
 #define INST_LOAD_TX1_BUF_DATA      0x43
 #define INST_LOAD_TX2_BUF_ID        0x44
 #define INST_LOAD_TX2_BUF_DATA      0x45
-#define INST_RTS(num)               0x80|(1<<num)	/* Request to send CAN message. TX num = {0,1,2} */
+#define INST_RTS(num)               0x80|(1<<num)   /* Request to send CAN message. TX num = {0,1,2} */
 #define INST_READ_STATUS            0xA0
 #define INST_RX_STATUS              0xB0
 #define INST_BIT_MODIFY             0x05
@@ -273,8 +273,8 @@ enum CANINTF_enum{
 
 /*===== CONFIGURATION  =====================================================
  *==========================================================================*/
-#define CANCTRL		0x0F
-#define CANSTAT		0x0E
+#define CANCTRL     0x0F
+#define CANSTAT     0x0E
 
 /* ===CANCTRL register bits=== */
 enum CANCTRL_enum{

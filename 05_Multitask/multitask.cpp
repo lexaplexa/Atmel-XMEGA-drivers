@@ -1,4 +1,3 @@
-
 /*****************************************************************************
  * multitask.cpp
  *
@@ -19,10 +18,10 @@
 
 void inline MTASK::Init(uint32_t unCpuFreq, uint32_t unTicksPerSecond)
 {
-    MULTITASK_TIMER.CTRLA = 0<<TC0_CLKSEL3_bp|1<<TC0_CLKSEL2_bp|0<<TC0_CLKSEL1_bp|0<<TC0_CLKSEL0_bp;	/* Clock divided by 8 (0100) */
-    MULTITASK_TIMER.CTRLB = 0<<TC0_WGMODE2_bp|0<<TC0_WGMODE1_bp|0<<TC0_WGMODE0_bp;						/* Normal counter */
-    MULTITASK_TIMER.PER = unCpuFreq/8/unTicksPerSecond;													/* Set period for ticks */
-    MULTITASK_TIMER.INTCTRLA = TC_OVFINTLVL_MED_gc;														/* Set interrupt level */
+    MULTITASK_TIMER.CTRLA = 0<<TC0_CLKSEL3_bp|1<<TC0_CLKSEL2_bp|0<<TC0_CLKSEL1_bp|0<<TC0_CLKSEL0_bp;    /* Clock divided by 8 (0100) */
+    MULTITASK_TIMER.CTRLB = 0<<TC0_WGMODE2_bp|0<<TC0_WGMODE1_bp|0<<TC0_WGMODE0_bp;                      /* Normal counter */
+    MULTITASK_TIMER.PER = unCpuFreq/8/unTicksPerSecond;                                                 /* Set period for ticks */
+    MULTITASK_TIMER.INTCTRLA = TC_OVFINTLVL_MED_gc;                                                     /* Set interrupt level */
 }
 
 void inline MTASK::TickElapsed()
@@ -59,8 +58,8 @@ void inline MTASK::Schedule()
     {
         if (isTaskActive(i))
         {
-        	m_unActiveTasks++;
-        	if (isTaskReadyToRun(i)) {m_unCurrentTask = i; m_unHighestPrio = m_sTask[i].unPriority;}
+            m_unActiveTasks++;
+            if (isTaskReadyToRun(i)) {m_unCurrentTask = i; m_unHighestPrio = m_sTask[i].unPriority;}
         }
     }
     
@@ -74,20 +73,20 @@ void inline MTASK::Schedule()
     }
     
     /* If no active task available, CPU is going to POWER SAVE 
-	 * sleep mode, else to IDLE sleep mode.
-	 * Wait for next interrupt (tick or some else interrupt) */
-	else if (DEEP_SLEEP && !m_unActiveTasks)
-	{
-		SLEEP.CTRL = SLEEP_SMODE_PSAVE_gc|SLEEP_SEN_bm;
-		asm("sleep");
-		SLEEP.CTRL = 0;
-	}
-	else
-	{
-		SLEEP.CTRL = SLEEP_SMODE_IDLE_gc|SLEEP_SEN_bm;
-		asm("sleep");
-		SLEEP.CTRL = 0;
-	}
+     * sleep mode, else to IDLE sleep mode.
+     * Wait for next interrupt (tick or some else interrupt) */
+    else if (DEEP_SLEEP && !m_unActiveTasks)
+    {
+        SLEEP.CTRL = SLEEP_SMODE_PSAVE_gc|SLEEP_SEN_bm;
+        asm("sleep");
+        SLEEP.CTRL = 0;
+    }
+    else
+    {
+        SLEEP.CTRL = SLEEP_SMODE_IDLE_gc|SLEEP_SEN_bm;
+        asm("sleep");
+        SLEEP.CTRL = 0;
+    }
 }
 
 inline uint8_t MTASK::unFreeOrRunPos(void taskFunc())
@@ -189,7 +188,7 @@ void MTASK::Repeat(void taskFunc(), uint16_t unTimeout, uint8_t unPriority)
 
 void MTASK::Stop(void taskFunc())
 {
-    uint8_t unBufPos = unBufferPos(taskFunc);	
+    uint8_t unBufPos = unBufferPos(taskFunc);   
     if (unBufPos == TASK_IDLE) {return;}
     setTaskInactive(unBufPos);
     m_sTask[unBufPos].bSuspend = false;
@@ -271,7 +270,7 @@ int main(void)
     cMTask.Delay(taskStartUp,TASK_TOUT_MS(STARTUP_TIMEOUT));
 
     /* Enable HIGH, MEDIUM and LOW level interrupt */
-    CCP = CCP_IOREG_gc;		/* IVSEL is configuration change protected */
+    CCP = CCP_IOREG_gc;     /* IVSEL is configuration change protected */
 #if BOOT_LOADER == true
     PMIC.CTRL = PMIC_IVSEL_bm|PMIC_HILVLEN_bm|PMIC_MEDLVLEN_bm|PMIC_LOLVLEN_bm;
 #else

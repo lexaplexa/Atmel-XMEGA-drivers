@@ -35,7 +35,7 @@ BMP180::BMP180(TWI_t *psTwi, uint32_t unFcpu, uint32_t unFtwi)
     m_sCaldata.B2 = (uint16_t)data[14]<<8|data[15];
     m_sCaldata.MB = (uint16_t)data[16]<<8|data[17];
     m_sCaldata.MC = (uint16_t)data[18]<<8|data[19];
-    m_sCaldata.MD = (uint16_t)data[20]<<8|data[21];	
+    m_sCaldata.MD = (uint16_t)data[20]<<8|data[21]; 
 }
 
 void BMP180::WriteReg(BMP180_REG_enum eReg, uint8_t byte)
@@ -47,7 +47,7 @@ void BMP180::WriteReg(BMP180_REG_enum eReg, uint8_t byte)
     TWI_MASTER_WAIT_WRITE_DONE(m_psTwi);                        /* Wait until address is sent */
     TWI_MASTER_CLEAR_WRITE_FLAG(m_psTwi);                       /* Clear flag */
     
-    if (TWI_MASTER_ARBLOST_FLAG(m_psTwi)) {return;}	            /* Arbitration lost */
+    if (TWI_MASTER_ARBLOST_FLAG(m_psTwi)) {return;}             /* Arbitration lost */
     TWI_MASTER_CLEAR_WRITE_FLAG(m_psTwi);                       /* Clear flag */
     
     m_psTwi->MASTER.DATA = eReg;                                /* Register address */
@@ -119,7 +119,7 @@ int32_t BMP180::CalcPress(SAMPLE_ACCURACY_enum eSmplAccy)
     x3 = (((int32_t)m_sCaldata.AC3*b6>>13)+(((int32_t)m_sCaldata.B1*(b6*b6>>12))>>16)+2)>>2;
     b4 = (uint32_t)m_sCaldata.AC4*(x3+32768)>>15;
     b7 = ((uint32_t)bmp180_adc-b3)*(50000>>eSmplAccy);
-    if (b7 < 0x80000000) {p = (b7<<1)/b4;}	else {p = (b7/b4)<<2;}
+    if (b7 < 0x80000000) {p = (b7<<1)/b4;}  else {p = (b7/b4)<<2;}
     p += ((((p>>8)*(p>>8)*3038)>>16)+(((-7357*p)>>16)+3791)>>4);
     
     return m_nPress = p;

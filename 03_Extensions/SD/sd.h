@@ -54,8 +54,8 @@
     SD_CMD_SEND_IF_COND                 = 8 ,       /* CMD8 */
     SD_CMD_SEND_CSD                     = 9 ,       /* CMD9 */
     SD_CMD_STOP_TRANSMISSION            = 12,       /* CMD12 */
-    SD_CMD_SEND_STATUS		            = 13,       /* CMD13 */
-    SD_CMD_SET_BLOCK_LEN	            = 16,       /* CMD16 */
+    SD_CMD_SEND_STATUS                  = 13,       /* CMD13 */
+    SD_CMD_SET_BLOCK_LEN                = 16,       /* CMD16 */
     SD_CMD_READ_SINGLE_BLOCK            = 17,       /* CMD17 */
     SD_CMD_READ_MULTIPLE_BLOCKS         = 18,       /* CMD18 */
     SD_CMD_WRITE_SINGLE_BLOCK           = 24,       /* CMD24 */

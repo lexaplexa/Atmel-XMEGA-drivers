@@ -217,7 +217,7 @@ enum MEMORY_enum {
         DispSendData((uint8_t) (unStart));          /* lower data byte */
         DispSendData((uint8_t) (unEnd>>8));         /* upper data byte */
         DispSendData((uint8_t) (unEnd));            /* lower data byte */
-    };	
+    };  
     
     
     /**
@@ -226,7 +226,7 @@ enum MEMORY_enum {
     * \param    unStart     - start row
     * \param    unEnd       - end row (including)
     * 
-    * \return	void
+    * \return   void
     */
     inline void PaSet(uint16_t unStart, uint16_t unEnd)
     {
@@ -330,7 +330,7 @@ enum MEMORY_enum {
     * \param    unRowPos    - row position (left top corner)
     * \param    unColPos    - column position (left top corner)
     * 
-    * \return	void
+    * \return   void
     */
     void DispPrintPicture(const uint8_t *punPicture, uint16_t unRowPos, uint16_t unColPos);
     

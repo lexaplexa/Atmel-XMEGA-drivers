@@ -8,15 +8,15 @@
  *
  *===== FONT STRUCTURE =========================
  * Font is stored in Program memory
- * pchText[0]		= number of rows
- * pchText[1]		= number of columns
- * pchText[2]		= number of pixel data bytes
- * pchText[3..n]	= pixel data
+ * pchText[0]       = number of rows
+ * pchText[1]       = number of columns
+ * pchText[2]       = number of pixel data bytes
+ * pchText[3..n]    = pixel data
  ************************************************/
 
 #include <avr/pgmspace.h>
 
-#define FONT_PETR_SIZE	27	/* Maximal size of character in pixels */
+#define FONT_PETR_SIZE  27  /* Maximal size of character in pixels */
 
 /*===== Following pixel data for every character =========================*/
 const uint8_t petr_ascii_20[] PROGMEM = {0x16,0x07,22,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
@@ -122,12 +122,12 @@ const uint8_t petr_ascii_7E[] PROGMEM = {0x16,0x08,0x16,0x00,0x70,0xDB,0x0E,0x00
  * aFontXXXX[1..n] = pointers to each character pixel data
  *==========================================================================*/
 const uint8_t *aFontPetr[] = {(const uint8_t*)FONT_PETR_SIZE,petr_ascii_20,petr_ascii_21,petr_ascii_22,petr_ascii_23,petr_ascii_24,petr_ascii_25,petr_ascii_26,petr_ascii_27,petr_ascii_28,petr_ascii_29,petr_ascii_2A,petr_ascii_2B,
-								petr_ascii_2C,petr_ascii_2D,petr_ascii_2E,petr_ascii_2F,petr_ascii_30,petr_ascii_31,petr_ascii_32,petr_ascii_33,petr_ascii_34,petr_ascii_35,petr_ascii_36,petr_ascii_37,
-								petr_ascii_38,petr_ascii_39,petr_ascii_3A,petr_ascii_3B,petr_ascii_3C,petr_ascii_3D,petr_ascii_3E,petr_ascii_3F,petr_ascii_40,petr_ascii_41,petr_ascii_42,petr_ascii_43,
-								petr_ascii_44,petr_ascii_45,petr_ascii_46,petr_ascii_47,petr_ascii_48,petr_ascii_49,petr_ascii_4A,petr_ascii_4B,petr_ascii_4C,petr_ascii_4D,petr_ascii_4E,petr_ascii_4F,
-								petr_ascii_50,petr_ascii_51,petr_ascii_52,petr_ascii_53,petr_ascii_54,petr_ascii_55,petr_ascii_56,petr_ascii_57,petr_ascii_58,petr_ascii_59,petr_ascii_5A,petr_ascii_5B,
-								petr_ascii_5C,petr_ascii_5D,petr_ascii_5E,petr_ascii_5F,petr_ascii_60,petr_ascii_61,petr_ascii_62,petr_ascii_63,petr_ascii_64,petr_ascii_65,petr_ascii_66,petr_ascii_67,
-								petr_ascii_68,petr_ascii_69,petr_ascii_6A,petr_ascii_6B,petr_ascii_6C,petr_ascii_6D,petr_ascii_6E,petr_ascii_6F,petr_ascii_70,petr_ascii_71,petr_ascii_72,petr_ascii_73,
-								petr_ascii_74,petr_ascii_75,petr_ascii_76,petr_ascii_77,petr_ascii_78,petr_ascii_79,petr_ascii_7A,petr_ascii_7B,petr_ascii_7C,petr_ascii_7D,petr_ascii_7E};
+                                petr_ascii_2C,petr_ascii_2D,petr_ascii_2E,petr_ascii_2F,petr_ascii_30,petr_ascii_31,petr_ascii_32,petr_ascii_33,petr_ascii_34,petr_ascii_35,petr_ascii_36,petr_ascii_37,
+                                petr_ascii_38,petr_ascii_39,petr_ascii_3A,petr_ascii_3B,petr_ascii_3C,petr_ascii_3D,petr_ascii_3E,petr_ascii_3F,petr_ascii_40,petr_ascii_41,petr_ascii_42,petr_ascii_43,
+                                petr_ascii_44,petr_ascii_45,petr_ascii_46,petr_ascii_47,petr_ascii_48,petr_ascii_49,petr_ascii_4A,petr_ascii_4B,petr_ascii_4C,petr_ascii_4D,petr_ascii_4E,petr_ascii_4F,
+                                petr_ascii_50,petr_ascii_51,petr_ascii_52,petr_ascii_53,petr_ascii_54,petr_ascii_55,petr_ascii_56,petr_ascii_57,petr_ascii_58,petr_ascii_59,petr_ascii_5A,petr_ascii_5B,
+                                petr_ascii_5C,petr_ascii_5D,petr_ascii_5E,petr_ascii_5F,petr_ascii_60,petr_ascii_61,petr_ascii_62,petr_ascii_63,petr_ascii_64,petr_ascii_65,petr_ascii_66,petr_ascii_67,
+                                petr_ascii_68,petr_ascii_69,petr_ascii_6A,petr_ascii_6B,petr_ascii_6C,petr_ascii_6D,petr_ascii_6E,petr_ascii_6F,petr_ascii_70,petr_ascii_71,petr_ascii_72,petr_ascii_73,
+                                petr_ascii_74,petr_ascii_75,petr_ascii_76,petr_ascii_77,petr_ascii_78,petr_ascii_79,petr_ascii_7A,petr_ascii_7B,petr_ascii_7C,petr_ascii_7D,petr_ascii_7E};
 
 

@@ -16,5 +16,5 @@ CLOCK cClock;
 
 void taskStartUp()
 {
-	
+    cMTask.Delay(taskStartUpApp,TASK_TOUT_MS(1));
 }
