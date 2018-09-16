@@ -1,23 +1,24 @@
 # Atmel-XMEGA-drivers
 Source files for Atmel XMEGA controllers
 ## Recomended folder structure in Atmel Studio 7
-- app/
+- **app/**
   - tasks/
-    - task_startupapp.cpp
+    - *task_startupapp.cpp*
   - app.h
-- conf/
-  - conf_board.h
-  - conf_multitask.h
-- core/
+- **conf/**
+  - *conf_board.h*
+  - *conf_multitask.h*
+- **core/**
   - drivers/
-    - clock.h
+    - *clock.h*
   - extensions/
+  - modules/
   - multitask/
-    - multitask.cpp
-    - multitask.h
+    - *multitask.cpp*
+    - *multitask.h*
   - tasks/
-    - task_startup.cpp
+    - *task_startup.cpp*
   - core.h
-- project_name.atsln
-- project_name.cppproj
-- project_name.componentinfo.xml
+- *project_name.atsln*
+- *project_name.cppproj*
+- *project_name.componentinfo.xml*
