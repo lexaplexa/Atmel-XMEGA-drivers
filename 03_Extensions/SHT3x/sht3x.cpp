@@ -2,7 +2,7 @@
 * sht3x.cpp
 *
 * Created: 10.9.2018 20:50:51
-* Revised:
+* Revised: 2.12.2018
 * Author: LeXa
 *
 * ABOUT:
@@ -22,9 +22,6 @@ SHT3X::SHT3X(TWI_t *psTwi, uint32_t unFBaud, uint32_t unFCpu)
 
 void SHT3X::SingleShotMeasure(SHT3X_SINGLESHOT_ACCURACY eAccuracy)
 {
-    uint8_t aData[6];
-    uint16_t unMesTempC, unMesHum;
-    
     cli();
     
     /* Measure temperature and humidity */
@@ -44,7 +41,16 @@ void SHT3X::SingleShotMeasure(SHT3X_SINGLESHOT_ACCURACY eAccuracy)
     TWI_MASTER_WAIT_WRITE_DONE(m_psTwi);                        /* Wait until byte is sent */
     TWI_MASTER_CLEAR_WRITE_FLAG(m_psTwi);                       /* Clear flag */
     
-    TWI_MASTER_STOP(m_psTwi);                                   /* Stop communication */
+    TWI_MASTER_STOP(m_psTwi);                                   /* Stop communication */    
+    sei();
+}
+
+void SHT3X::ReadOut()
+{
+    uint8_t aData[6];
+    uint16_t unMesTempC, unMesHum;
+    
+    cli();
     
     /* Read measured temperature and humidity */
     TWI_MASTER_WAIT_BUSY(m_psTwi);

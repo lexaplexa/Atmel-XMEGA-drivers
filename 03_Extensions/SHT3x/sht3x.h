@@ -2,7 +2,7 @@
  * sht3x.h
  *
  * Created: 10.9.2018 20:26:54
- * Revised: 16.9.2018
+ * Revised: 2.12.2018
  * Author: LeXa
  *
  * ABOUT:
@@ -58,6 +58,8 @@ class SHT3X
          * \return void
          */
         void SingleShotMeasure(SHT3X_SINGLESHOT_ACCURACY eAccuracy);
+        
+        void ReadOut();
         
         /**
          * \brief Get temperature (°C)
