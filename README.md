@@ -3,7 +3,7 @@ Source files for Atmel XMEGA controllers
 ## Recomended folder structure in Atmel Studio 7
 - **app/**
   - tasks/
-    - *task_startupapp.cpp*
+    - *task_startup_app.cpp*
   - app.h
 - **conf/**
   - *conf_board.h*
@@ -17,7 +17,7 @@ Source files for Atmel XMEGA controllers
     - *multitask.cpp*
     - *multitask.h*
   - tasks/
-    - *task_startup.cpp*
+    - *task_startup_core.cpp*
   - core.h
 - *project_name.atsln*
 - *project_name.cppproj*
