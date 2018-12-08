@@ -2,7 +2,7 @@
  * multitask.cpp
  *
  * Created: 4.12.2015 15:15:18
- * Revised: 24.6.2018
+ * Revised: 8.12.2018
  * Author: LeXa
  * BOARD: 
  * ABOUT:
@@ -12,7 +12,7 @@
 #include "multitask.h"
 
 #define SysTimeOverflow             m_nSysTime < 0
-#define isTaskActive(pos)           (m_sTask[pos].ptaskFunc)
+#define isTaskActive(pos)           (m_sTask[pos].ptaskFunc && !m_sTask[pos].bSuspend)
 #define isTaskReadyToRun(pos)       !m_sTask[pos].bSuspend && m_sTask[pos].nTimeMatch <= m_nSysTime && m_sTask[pos].unPriority >= m_unHighestPrio
 #define setTaskInactive(pos)        m_sTask[pos].nTimeMatch = -1; m_sTask[pos].unPriority = 0; m_sTask[pos].ptaskFunc = 0
 
@@ -30,14 +30,7 @@ void inline MTASK::TickElapsed()
     m_nSysTime++;
     
     /* When system time overflows, most significant bit of every time match needs to be cleared */
-    if (SysTimeOverflow)
-    {
-        m_nSysTime = 0;
-        for (uint8_t i=0; i<TASK_BUFFER_SIZE; i++) 
-        {
-            if(isTaskActive(i)) {m_sTask[i].nTimeMatch &= 0x7FFFFFFF;}
-        }
-    }
+    if (SysTimeOverflow) {m_nSysTime = 0;}
     
     /* Increment time match if task is active and suspended */
     for (uint8_t i=0; i<TASK_BUFFER_SIZE; i++)
@@ -67,7 +60,7 @@ void inline MTASK::Schedule()
     if (m_unCurrentTask != TASK_IDLE)
     {
         FuncPtr_t pvRunTask = (FuncPtr_t)m_sTask[m_unCurrentTask].ptaskFunc;
-        if (m_sTask[m_unCurrentTask].bRepeat) {m_sTask[m_unCurrentTask].nTimeMatch = m_nSysTime + m_sTask[m_unCurrentTask].unTimeOut;}
+        if (m_sTask[m_unCurrentTask].bRepeat) {m_sTask[m_unCurrentTask].nTimeMatch = (m_nSysTime + m_sTask[m_unCurrentTask].unTimeOut) & 0x7FFFFFFF;}
         else {setTaskInactive(m_unCurrentTask);}        /* This task buffer position is inactive and free for another task */
         pvRunTask();                                    /* Run task */
     }
@@ -75,11 +68,16 @@ void inline MTASK::Schedule()
     /* If no active task available, CPU is going to POWER SAVE 
      * sleep mode, else to IDLE sleep mode.
      * Wait for next interrupt (tick or some else interrupt) */
-    else if (DEEP_SLEEP && !m_unActiveTasks)
+    else if (bDeepSleepEnabled && !m_unActiveTasks)
     {
+        /* Run event before deep sleep if available */
+        if (m_peventFunc[TASK_EVENT_TYPE_BeforeDeepSleep]) {((FuncPtr_t)m_peventFunc[TASK_EVENT_TYPE_BeforeDeepSleep])();}
+        /* Set power save mode */
         SLEEP.CTRL = SLEEP_SMODE_PSAVE_gc|SLEEP_SEN_bm;
         asm("sleep");
         SLEEP.CTRL = 0;
+        /* Run event after wake up if available */
+        if (m_peventFunc[TASK_EVENT_TYPE_AfterWakeUp]) {((FuncPtr_t)m_peventFunc[TASK_EVENT_TYPE_AfterWakeUp])();}
     }
     else
     {
@@ -97,10 +95,9 @@ inline uint8_t MTASK::unFreeOrRunPos(void taskFunc())
         if (m_sTask[i].ptaskFunc == taskFunc) {return i;}
         else if (!isTaskActive(i)) {unBufPos = i;}
     }
-    if (unBufPos == TASK_BUFFER_FULL && peventFunc[TASK_EVENT_TYPE_TaskBufferOverflow]) 
+    if (unBufPos == TASK_BUFFER_FULL && m_peventFunc[TASK_EVENT_TYPE_TaskBufferOverflow]) 
     {
-        FuncPtr_t CallBack = (FuncPtr_t)peventFunc[TASK_EVENT_TYPE_TaskBufferOverflow]; 
-        CallBack();
+        ((FuncPtr_t)m_peventFunc[TASK_EVENT_TYPE_TaskBufferOverflow])();
     }
     return unBufPos;
 }
@@ -110,11 +107,6 @@ inline uint8_t MTASK::unBufferPos(void taskFunc())
     for (uint8_t i=0; i<TASK_BUFFER_SIZE; i++)
     {
         if (m_sTask[i].ptaskFunc == taskFunc) {return i;}
-    }
-    if (peventFunc[TASK_EVENT_TYPE_TaskBufferOverflow]) 
-    {
-        FuncPtr_t CallBack = (FuncPtr_t)peventFunc[TASK_EVENT_TYPE_TaskBufferOverflow]; 
-        CallBack();
     }
     return TASK_BUFFER_FULL;
 }
@@ -145,18 +137,17 @@ void MTASK::Delay(void taskFunc(), uint16_t unTimeout)
     uint8_t unBufPos = unFreeOrRunPos(taskFunc);
     if (unBufPos == TASK_BUFFER_FULL) {return;}
     m_sTask[unBufPos].ptaskFunc = (void*)taskFunc;
-    m_sTask[unBufPos].nTimeMatch = m_nSysTime + unTimeout;
+    m_sTask[unBufPos].nTimeMatch = (m_nSysTime + unTimeout) & 0x7FFFFFFF;
     m_sTask[unBufPos].bRepeat = false;
     m_sTask[unBufPos].bSuspend = false;
 }
-
 
 void MTASK::Delay(void taskFunc(), uint16_t unTimeout, uint8_t unPriority)
 {
     uint8_t unBufPos = unFreeOrRunPos(taskFunc);
     if (unBufPos == TASK_BUFFER_FULL) {return;}
     m_sTask[unBufPos].ptaskFunc = (void*)taskFunc;
-    m_sTask[unBufPos].nTimeMatch = m_nSysTime + unTimeout;
+    m_sTask[unBufPos].nTimeMatch = (m_nSysTime + unTimeout) & 0x7FFFFFFF;
     m_sTask[unBufPos].bRepeat = false;
     m_sTask[unBufPos].bSuspend = false;
     m_sTask[unBufPos].unPriority = unPriority;
@@ -167,19 +158,18 @@ void MTASK::Repeat(void taskFunc(), uint16_t unTimeout)
     uint8_t unBufPos = unFreeOrRunPos(taskFunc);
     if (unBufPos == TASK_BUFFER_FULL) {return;}
     m_sTask[unBufPos].ptaskFunc = (void*)taskFunc;
-    m_sTask[unBufPos].nTimeMatch = m_nSysTime + unTimeout;
+    m_sTask[unBufPos].nTimeMatch = (m_nSysTime + unTimeout) & 0x7FFFFFFF;
     m_sTask[unBufPos].unTimeOut = unTimeout;
     m_sTask[unBufPos].bRepeat = true;
     m_sTask[unBufPos].bSuspend = false;
 }
-
 
 void MTASK::Repeat(void taskFunc(), uint16_t unTimeout, uint8_t unPriority)
 {
     uint8_t unBufPos = unFreeOrRunPos(taskFunc);
     if (unBufPos == TASK_BUFFER_FULL) {return;}
     m_sTask[unBufPos].ptaskFunc = (void*)taskFunc;
-    m_sTask[unBufPos].nTimeMatch = m_nSysTime + unTimeout;
+    m_sTask[unBufPos].nTimeMatch = (m_nSysTime + unTimeout) & 0x7FFFFFFF;
     m_sTask[unBufPos].unTimeOut = unTimeout;
     m_sTask[unBufPos].bRepeat = true;
     m_sTask[unBufPos].bSuspend = false;
@@ -228,7 +218,7 @@ void MTASK::Replace(void taskOrigin(), void taskReplace())
 void MTASK::SetEvent(TASK_EVENT_TYPE_enum eEventType, void vCallBack())
 {
     if (eEventType >= TASK_EVENT_TYPE_sum) {return;}
-    peventFunc[eEventType] = (void*)vCallBack;
+    m_peventFunc[eEventType] = (void*)vCallBack;
 }
 
 
