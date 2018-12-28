@@ -32,7 +32,7 @@
 /* For example:                                                         */
 /* task_startup.cpp                                                     */
 /*                                                                      */
-/* Every task source code must include core.h                           */
+/* Every task source code must include app.h                            */
 /************************************************************************/
 
 
